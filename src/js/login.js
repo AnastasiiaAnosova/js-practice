@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import storage from "./storage";
 // ЗАДАЧА 1
 
@@ -22,9 +23,15 @@ let userData = {};
 const formElement = document.querySelector('.login-form');
 const loginBtn = document.querySelector('.login-btn');
 const inputs = document.querySelectorAll('.login-input');
+const saveData = storage.load('LOCAL_KEY');
 
 formElement.addEventListener('input', onSaveData);
 formElement.addEventListener('submit', onCheckData);
+
+if (saveData) {
+    loginBtn.textContent = 'Logout';
+    inputs.forEach(input => input.setAttribute('readonly', true));
+}
 
 function onSaveData(event) {
     const { name, value } = event.target;
@@ -34,12 +41,19 @@ function onSaveData(event) {
 
 function onCheckData(e) {
     e.preventDefault();
+    if (loginBtn.textContent === 'Logout') {
+        loginBtn.textContent = 'Login';
+        inputs.forEach(input => input.removeAttribute('readonly'));
+        storage.remove(LOCAL_KEY);
+        userData = {};
+        return;
+    }
     const { email, password } = userData;
     if (!email || !password) {
-        return alert('Fill in all fields');
+        return Notify.failure('Fill in all fields');
     }
     if (email !== USER_DATA.email || password !== USER_DATA.password) {
-        return alert('The entered data does not match');
+        return Notify.failure('The entered data does not match');
     }
     storage.save(LOCAL_KEY, userData);
     loginBtn.textContent = 'Logout';
