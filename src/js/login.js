@@ -24,6 +24,7 @@ const formElement = document.querySelector('.login-form');
 const loginBtn = document.querySelector('.login-btn');
 const inputs = document.querySelectorAll('.login-input');
 const saveData = storage.load('LOCAL_KEY');
+const todoForm = document.querySelector('.todo')
 
 formElement.addEventListener('input', onSaveData);
 formElement.addEventListener('submit', onCheckData);
@@ -46,6 +47,7 @@ function onCheckData(e) {
         inputs.forEach(input => input.removeAttribute('readonly'));
         storage.remove(LOCAL_KEY);
         userData = {};
+        todoForm.style.display = 'none';
         return;
     }
     const { email, password } = userData;
@@ -58,5 +60,6 @@ function onCheckData(e) {
     storage.save(LOCAL_KEY, userData);
     loginBtn.textContent = 'Logout';
     inputs.forEach(input => input.setAttribute('readonly', true));
+    todoForm.style.display = 'flex';
     formElement.reset();
 }
