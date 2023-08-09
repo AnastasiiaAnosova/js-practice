@@ -21,7 +21,8 @@ const USER_DATA = {
 const LOCAL_KEY = 'login-data';//ключ по якому буде зберігатися наші дані в local storage   /the key by which our data will be stored in local storage
 let userData = {};//обʼєкт, де ми будемо зберігати дані,які ввів нащ користувач, щоб увійти в систему    /the object where we will store the data entered by our user to log in
 const formElement = document.querySelector('.login-form');
-const inputs = document.querySelectorAll('.login-input');submitBtn = document.querySelector('.login-btn');
+const inputs = document.querySelectorAll('.login-input');
+const submitBtn = document.querySelector('.login-btn');
 const saveData = storage.load('LOCAL_KEY');//отримуємо дані з local storage,які ввів користувач   /get data from local storage that the user has entered
 const todoForm = document.querySelector('.todo')
 
