@@ -49,8 +49,8 @@ function onSaveData(event) {
     userData[name] = value;//записуємо дані в обʼєкт для зберігання даних,що ввів користувач    /write the data to the data storage object entered by the user
 }
 
-function onSubmitForm(e) {
-    e.preventDefault();//відміняємо дії за змовчування при submit     /cancel default actions on submit
+function onSubmitForm(event) {
+    event.preventDefault();//відміняємо дії за змовчування при submit     /cancel default actions on submit
     if (submitBtn.textContent === 'Logout') {
         submitBtn.textContent = 'Login';
         inputs.forEach(input => input.removeAttribute('readonly'));
